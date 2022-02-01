@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProductDescriptionFragment">
+
+    <TextView
+        android:id="@+id/tv_product_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:textColor="#000000"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Scelerisque purus semper eget duis at. Enim praesent elementum facilisis leo vel fringilla est ullamcorper. Urna cursus eget nunc scelerisque viverra mauris in aliquam sem. Et odio pellentesque diam volutpat commodo sed. Dictum non consectetur a erat nam at lectus urna. Ornare massa eget egestas purus viverra accumsan in nisl nisi. Urna duis convallis convallis tellus id interdum velit. Diam maecenas sed enim ut. Ornare arcu dui vivamus arcu felis bibendum ut tristique. Condimentum vitae sapien pellentesque habitant morbi. Placerat vestibulum lectus mauris ultrices eros. Dictumst vestibulum rhoncus est pellentesque elit. Eros donec ac odio tempor orci dapibus. Est ullamcorper eget nulla facilisi etiam. Ornare arcu dui vivamus arcu felis bibendum ut tristique. Sed risus pretium quam vulputate.
+        Eros donec ac odio tempor orci dapibus ultrices in iaculis. Fames ac turpis egestas sed tempus urna et pharetra. Quam vulputate dignissim suspendisse in. Sagittis nisl rhoncus mattis rhoncus. Sed viverra ipsum nunc aliquet bibendum enim. Imperdiet massa tincidunt nunc pulvinar. Volutpat sed cras ornare arcu dui vivamus arcu felis bibendum. Lorem ipsum dolor sit amet consectetur adipiscing elit pellentesque habitant. Vehicula ipsum a arcu cursus. Arcu cursus euismod quis viverra nibh. Sit amet commodo nulla facilisi nullam vehicula ipsum a arcu." />
+</FrameLayout>

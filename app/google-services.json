@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "879728291311",
+    "project_id": "iani-95b59",
+    "storage_bucket": "iani-95b59.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:879728291311:android:40d24087c688c4efd5da1a",
+        "android_client_info": {
+          "package_name": "com.example.iani"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "879728291311-4q9vrg80bgmcd5c7haon29dvegj481ic.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBu__UBvCKAVeLesjHb5vkTvQbORxDQmbY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "879728291311-4q9vrg80bgmcd5c7haon29dvegj481ic.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
