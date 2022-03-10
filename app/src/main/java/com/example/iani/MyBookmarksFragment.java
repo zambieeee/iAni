@@ -1,5 +1,6 @@
 package com.example.iani;
 
+import android.app.Dialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -24,11 +25,22 @@ public class MyBookmarksFragment extends Fragment {
     }
 
     private RecyclerView bookmarkRecyclerView;
+    private Dialog loadingDialog;
+    public static BookmarkAdapter bookmarkAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_bookmarks, container, false);
+
+        ///loading dialog
+        loadingDialog = new Dialog(getContext());
+        loadingDialog.setContentView(R.layout.loading_progress_dialog);
+        loadingDialog.setCancelable(false);
+        loadingDialog.getWindow().setBackgroundDrawable(getContext().getDrawable(R.drawable.slider_background));
+        loadingDialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        loadingDialog.show();
+        ///loading dialog
 
         bookmarkRecyclerView = view.findViewById(R.id.my_bookmarks_recyclerview);
 
@@ -36,9 +48,14 @@ public class MyBookmarksFragment extends Fragment {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         bookmarkRecyclerView.setLayoutManager(linearLayoutManager);
 
-        List<BookmarkModel>bookmarkModelList=new ArrayList<>();
+        if(DBqueries.bookmarkModelList.size() == 0){
+            DBqueries.bookmarks.clear();
+            DBqueries.loadBookmarks(getContext(),loadingDialog, true);
+        }else {
+            loadingDialog.dismiss();
+        }
 
-        BookmarkAdapter bookmarkAdapter = new BookmarkAdapter(bookmarkModelList, true);
+        bookmarkAdapter = new BookmarkAdapter(DBqueries.bookmarkModelList, true);
         bookmarkRecyclerView.setAdapter(bookmarkAdapter);
         bookmarkAdapter.notifyDataSetChanged();
 

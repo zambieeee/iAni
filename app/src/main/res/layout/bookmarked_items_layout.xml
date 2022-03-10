@@ -48,7 +48,7 @@
         app:layout_constraintTop_toBottomOf="@+id/bookmark_product_title">
 
         <TextView
-            android:id="@+id/bookmark_tv_product_rating_miniview"
+            android:id="@+id/tv_product_rating_miniview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="3dp"
@@ -68,7 +68,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/bookmark_total_ratings"
+        android:id="@+id/total_ratings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

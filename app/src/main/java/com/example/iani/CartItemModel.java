@@ -15,24 +15,44 @@ public class CartItemModel {
     }
 
     //cart item
-    private int productImage;
+    private String productID;
+    private String productImage;
     private String productTitle;
     private String productPrice;
-    private int productQuantity;
+    private Long productQuantity;
+    private boolean inStock;
 
-    public CartItemModel(int type, int productImage, String productTitle, String productPrice, int productQuantity) {
+    public CartItemModel(int type, String productID, String productImage, String productTitle, String productPrice, Long productQuantity,boolean inStock) {
         this.type = type;
+        this.productID =productID;
         this.productImage = productImage;
         this.productTitle = productTitle;
         this.productPrice = productPrice;
         this.productQuantity = productQuantity;
+        this.inStock = inStock;
     }
 
-    public int getProductImage() {
+    public boolean isInStock() {
+        return inStock;
+    }
+
+    public void setInStock(boolean inStock) {
+        this.inStock = inStock;
+    }
+
+    public String getProductID() {
+        return productID;
+    }
+
+    public void setProductID(String productID) {
+        this.productID = productID;
+    }
+
+    public String getProductImage() {
         return productImage;
     }
 
-    public void setProductImage(int productImage) {
+    public void setProductImage(String productImage) {
         this.productImage = productImage;
     }
 
@@ -52,60 +72,21 @@ public class CartItemModel {
         this.productPrice = productPrice;
     }
 
-    public int getProductQuantity() {
+    public Long getProductQuantity() {
         return productQuantity;
     }
 
-    public void setProductQuantity(int productQuantity) {
+    public void setProductQuantity(Long productQuantity) {
         this.productQuantity = productQuantity;
     }
     //cart item
 
     //cart total
-    private String totalItems;
-    private String totalItemPrice;
-    private String deliveryPrice;
-    private String totalAmount;
 
-    public CartItemModel(int type, String totalItems, String totalItemPrice, String deliveryPrice, String totalAmount) {
+    public CartItemModel(int type) {
         this.type = type;
-        this.totalItems = totalItems;
-        this.totalItemPrice = totalItemPrice;
-        this.deliveryPrice = deliveryPrice;
-        this.totalAmount = totalAmount;
     }
 
-    public String getTotalItems() {
-        return totalItems;
-    }
-
-    public void setTotalItems(String totalItems) {
-        this.totalItems = totalItems;
-    }
-
-    public String getTotalItemPrice() {
-        return totalItemPrice;
-    }
-
-    public void setTotalItemPrice(String totalItemPrice) {
-        this.totalItemPrice = totalItemPrice;
-    }
-
-    public String getDeliveryPrice() {
-        return deliveryPrice;
-    }
-
-    public void setDeliveryPrice(String deliveryPrice) {
-        this.deliveryPrice = deliveryPrice;
-    }
-
-    public String getTotalAmount() {
-        return totalAmount;
-    }
-
-    public void setTotalAmount(String totalAmount) {
-        this.totalAmount = totalAmount;
-    }
 
     //cart total
 }

@@ -36,10 +36,10 @@ public class HorizontalProductScrollAdapter extends RecyclerView.Adapter<Horizon
         String resource = horizontalProductScrollModelList.get(position).getProduceImage();
         String title = horizontalProductScrollModelList.get(position).getProductTitle();
         String price = horizontalProductScrollModelList.get(position).getProductPrice();
+        String productId= horizontalProductScrollModelList.get(position).getProductID();
 
-        holder.setProductImage(resource);
-        holder.setProductTitle(title);
-        holder.setProductPrice(price);
+        holder.setData(productId,resource, title,price);
+
     }
 
     @Override
@@ -62,27 +62,20 @@ public class HorizontalProductScrollAdapter extends RecyclerView.Adapter<Horizon
             productImage = itemView.findViewById(R.id.h_s_product_image);
             productTitle = itemView.findViewById(R.id.h_s_product_title);
             productPrice = itemView.findViewById(R.id.h_s_product_price);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent productDetailsIntent = new Intent(itemView.getContext(),ProductDetailsActivity.class);
-                    itemView.getContext().startActivity(productDetailsIntent);
-                }
-            });
         }
 
-        private void setProductImage(String resource){
-            Glide.with(itemView.getContext()).load(resource).apply(new RequestOptions().placeholder(R.drawable.home)).into(productImage);
-        }
-
-        private void setProductTitle(String title){
-            productTitle.setText(title);
-        }
-
-        private void setProductPrice(String price){
+        private void setData(String productId, String resource,String title,String price){
+            Glide.with(itemView.getContext()).load(resource).apply(new RequestOptions().placeholder(R.mipmap.placeholder_image)).into(productImage);
             productPrice.setText("PHP "+price);
-        }
+            productTitle.setText(title);
 
+            if(!title.equals("")) {
+                itemView.setOnClickListener(v -> {
+                    Intent productDetailsIntent = new Intent(itemView.getContext(), ProductDetailsActivity.class);
+                    productDetailsIntent.putExtra("PRODUCT_ID", productId);
+                    itemView.getContext().startActivity(productDetailsIntent);
+                });
+            }
+        }
     }
 }

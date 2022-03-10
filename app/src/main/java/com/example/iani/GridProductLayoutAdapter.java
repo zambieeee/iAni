@@ -14,7 +14,7 @@ import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
-public class GridProductLayoutAdapter extends BaseAdapter {
+public class    GridProductLayoutAdapter extends BaseAdapter {
 
     List<HorizontalProductScrollModel> horizontalProductScrollModelList;
 
@@ -49,6 +49,7 @@ public class GridProductLayoutAdapter extends BaseAdapter {
                 @Override
                 public void onClick(View v){
                     Intent productDetailsIntent = new Intent (parent.getContext(), ProductDetailsActivity.class);
+                    productDetailsIntent.putExtra("PRODUCT_ID",horizontalProductScrollModelList.get(position).getProductID());
                     parent.getContext().startActivity(productDetailsIntent);
                 }
             });
@@ -57,7 +58,7 @@ public class GridProductLayoutAdapter extends BaseAdapter {
             TextView productTitle = view.findViewById(R.id.h_s_product_title);
             TextView productPrice = view.findViewById(R.id.h_s_product_price);
 
-            Glide.with(parent.getContext()).load(horizontalProductScrollModelList.get(position).getProduceImage()).apply(new RequestOptions().placeholder(R.drawable.home)).into(productImage);
+            Glide.with(parent.getContext()).load(horizontalProductScrollModelList.get(position).getProduceImage()).apply(new RequestOptions().placeholder(R.mipmap.placeholder_image)).into(productImage);
             productTitle.setText(horizontalProductScrollModelList.get(position).getProductTitle());
             productPrice.setText("PHP "+horizontalProductScrollModelList.get(position).getProductPrice());
         }else {

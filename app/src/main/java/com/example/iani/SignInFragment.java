@@ -65,6 +65,8 @@ public class SignInFragment extends Fragment {
     private FirebaseAuth firebaseAuth;
     private String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+.[a-z]+";
 
+    public static boolean disableCloseBtn = false;
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -112,6 +114,13 @@ public class SignInFragment extends Fragment {
         signInBtn = view.findViewById(R.id.sign_in_btn);
 
         firebaseAuth = FirebaseAuth.getInstance();
+
+        if(disableCloseBtn){
+            closeBtn.setVisibility(View.GONE);
+        }else {
+            closeBtn.setVisibility(View.VISIBLE);
+        }
+
         return view;
     }
 
@@ -234,8 +243,12 @@ public class SignInFragment extends Fragment {
     }
 
     private void mainIntent(){
-        Intent mainIntent = new Intent(getActivity(), MainActivity.class);
-        startActivity(mainIntent);
+        if(disableCloseBtn){
+            disableCloseBtn = false;
+        }else {
+            Intent mainIntent = new Intent(getActivity(), MainActivity.class);
+            startActivity(mainIntent);
+        }
         getActivity().finish();
     }
 }

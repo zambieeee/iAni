@@ -4,10 +4,20 @@ public class ProductOtherDetailsModel {
 
     private String featureName;
     private String featureValue;
+    private int type;
 
-    public ProductOtherDetailsModel(String featureName, String featureValue) {
+    public ProductOtherDetailsModel( int type, String featureName, String featureValue) {
         this.featureName = featureName;
         this.featureValue = featureValue;
+        this.type = type;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 
     public String getFeatureName() {

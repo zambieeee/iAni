@@ -2,6 +2,7 @@ package com.example.iani;
 
 public class BookmarkModel {
 
+    private String productId;
     private String productImage;
     private String productTitle;
     private String rating;
@@ -9,13 +10,22 @@ public class BookmarkModel {
     private String productPrice;
     private boolean COD;
 
-    public BookmarkModel(String productImage, String productTitle, String rating, long totalRatings, String productPrice, boolean COD) {
+    public BookmarkModel(String productId, String productImage, String productTitle, String rating, long totalRatings, String productPrice, boolean COD) {
+        this.productId = productId;
         this.productImage = productImage;
         this.productTitle = productTitle;
         this.rating = rating;
         this.totalRatings = totalRatings;
         this.productPrice = productPrice;
         this.COD = COD;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
     public String getProductImage() {

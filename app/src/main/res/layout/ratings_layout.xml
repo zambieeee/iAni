@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/white"
-    android:layout_marginTop="8dp"
-    android:layout_marginBottom="8dp"
-    android:elevation="3dp"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="64dp"
+    android:background="@color/white"
+    android:elevation="3dp">
 
     <TextView
         android:id="@+id/textView6"
@@ -17,8 +16,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="Ratings"
-        android:textSize="18sp"
         android:textColor="#000000"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -58,7 +57,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/bookmark_total_ratings"
+        android:id="@+id/total_ratings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -79,7 +78,7 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
         app:layout_constraintStart_toStartOf="@+id/linearLayout3"
-        app:layout_constraintTop_toBottomOf="@+id/bookmark_total_ratings">
+        app:layout_constraintTop_toBottomOf="@+id/total_ratings">
 
         <ProgressBar
             android:id="@+id/progressBar1"
@@ -282,10 +281,10 @@
         android:id="@+id/ratings_number_container"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:paddingRight="8dp"
-        android:paddingLeft="8dp"
         android:layout_marginStart="8dp"
         android:orientation="vertical"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/ratings_progressbar_container"
         app:layout_constraintStart_toEndOf="@+id/ratings_progressbar_container"
         app:layout_constraintTop_toTopOf="@+id/ratings_progressbar_container"

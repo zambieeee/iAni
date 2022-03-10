@@ -30,21 +30,19 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SignUpFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class SignUpFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -53,7 +51,7 @@ public class SignUpFragment extends Fragment {
     private String mParam2;
 
     public SignUpFragment() {
-        // Required empty public constructor
+
     }
 
     private TextView alreadyHaveAnAccount;
@@ -76,15 +74,8 @@ public class SignUpFragment extends Fragment {
     private FirebaseFirestore firebaseFirestore;
     private String emailPattern="[a-zA-Z0-9._-]+@[a-z]+.[a-z]+";
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SignUpFragment.
-     */
-    // TODO: Rename and change types and number of parameters
+    public static boolean disableCloseBtn = false;
+
     public static SignUpFragment newInstance(String param1, String param2) {
         SignUpFragment fragment = new SignUpFragment();
         Bundle args = new Bundle();
@@ -128,6 +119,12 @@ public class SignUpFragment extends Fragment {
         firebaseFirestore=FirebaseFirestore.getInstance();
 
         parentFrameLayout=getActivity().findViewById(R.id.register_framelayout);
+
+        if(disableCloseBtn){
+            closeBtn.setVisibility(View.GONE);
+        }else {
+            closeBtn.setVisibility(View.VISIBLE);
+        }
 
         return view;
     }
@@ -293,24 +290,67 @@ public class SignUpFragment extends Fragment {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
 
-                            Map<Object,String> userdata = new HashMap<>();
+                            Map<String, Object> userdata = new HashMap<>();
                             userdata.put("fullname", fullname.getText().toString());
                             userdata.put("userType", signup_usertype.getText().toString());
 
-                            firebaseFirestore.collection("USERS")
-                                    .add(userdata)
-                                    .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<DocumentReference> task) {
-                                            if (task.isSuccessful()){
-                                                mainIntent();
-                                            } else{
-                                                progressBar.setVisibility(View.INVISIBLE);
-                                                signUpBtn.setEnabled(true);
-                                                signUpBtn.setTextColor(Color.rgb(255,255,255));
-                                                String error = task.getException().getMessage();
-                                                Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
+                            firebaseFirestore.collection("USERS").document(firebaseAuth.getUid())
+                                    .set(userdata)
+                                    .addOnCompleteListener(task1 -> {
+                                        if (task1.isSuccessful()){
+
+                                            CollectionReference userDataReference = firebaseFirestore.collection("USERS").document(firebaseAuth.getUid()).collection("USER_DATA");
+
+                                            //MAPS
+                                            Map<String, Object> bookmarksMap = new HashMap<>();
+                                            bookmarksMap.put("list_size",(long) 0);
+
+                                            Map<String,Object>ratingsMap = new HashMap<>();
+                                            ratingsMap.put("list_size",(long) 0);
+
+                                            Map<String, Object> cartMap = new HashMap<>();
+                                            cartMap.put("list_size",(long)0);
+
+                                            Map<String, Object> myAddressesMap = new HashMap<>();
+                                            myAddressesMap.put("list_size",(long) 0);
+                                            //MAPS
+                                            List<String> documentNames = new ArrayList<>();
+                                            documentNames.add("MY_BOOKMARKS");
+                                            documentNames.add("MY_RATINGS");
+                                            documentNames.add("MY_CART");
+                                            documentNames.add("MY_ADDRESSES");
+
+                                            List<Map<String, Object>> documentFields = new ArrayList<>();
+                                            documentFields.add(bookmarksMap);
+                                            documentFields.add(ratingsMap);
+                                            documentFields.add(cartMap);
+                                            documentFields.add(myAddressesMap);
+
+                                            for (int x = 0;x<documentNames.size();x++){
+
+                                                final int finalX = x;
+                                                userDataReference.document(documentNames.get(x))
+                                                        .set(documentFields.get(x)).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        if(task.isSuccessful()){
+                                                            if (finalX == documentNames.size()-1) {
+                                                                mainIntent();
+                                                            }
+                                                        }else {
+                                                            progressBar.setVisibility(View.INVISIBLE);
+                                                            signUpBtn.setEnabled(true);
+                                                            signUpBtn.setTextColor(Color.rgb(255,255, 255));
+                                                            String error = task.getException().getMessage();
+                                                            Toast.makeText(getActivity(), error,Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    }
+                                                });
                                             }
+
+                                        } else{
+                                            String error = task1.getException().getMessage();
+                                            Toast.makeText(getActivity(), error, Toast.LENGTH_SHORT).show();
                                         }
                                     });
                         }else {
@@ -331,8 +371,12 @@ public class SignUpFragment extends Fragment {
     }
 
     private void mainIntent(){
-        Intent mainIntent = new Intent(getActivity(), MainActivity.class);
-        startActivity(mainIntent);
+        if(disableCloseBtn){
+            disableCloseBtn = false;
+        }else {
+            Intent mainIntent = new Intent(getActivity(), MainActivity.class);
+            startActivity(mainIntent);
+        }
         getActivity().finish();
     }
 }

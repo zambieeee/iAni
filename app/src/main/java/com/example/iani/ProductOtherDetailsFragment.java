@@ -13,11 +13,6 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ProductOtherDetailsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ProductOtherDetailsFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
@@ -34,6 +29,7 @@ public class ProductOtherDetailsFragment extends Fragment {
     }
 
     private RecyclerView productOtherDetailsRecyclerView;
+    public List<ProductOtherDetailsModel> productOtherDetailsModelList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,10 +44,6 @@ public class ProductOtherDetailsFragment extends Fragment {
 
         productOtherDetailsRecyclerView.setLayoutManager(linearLayoutManager);
 
-        List<ProductOtherDetailsModel> productOtherDetailsModelList = new ArrayList<>();
-        productOtherDetailsModelList.add(new ProductOtherDetailsModel("Category","Vegetables"));
-        productOtherDetailsModelList.add(new ProductOtherDetailsModel("Stock","99"));
-        productOtherDetailsModelList.add(new ProductOtherDetailsModel("Location","Pacita"));
 
         ProductOtherDetailsAdapter productOtherDetailsAdapter=new ProductOtherDetailsAdapter(productOtherDetailsModelList);
         productOtherDetailsRecyclerView.setAdapter(productOtherDetailsAdapter);
